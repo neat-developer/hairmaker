@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/neat-developer/hairmaker/issues"
   },
-  "homepage": "https://github.com/neat-developer/hairmaker#readme"
+  "homepage": "https://github.com/neat-developer/hairmaker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
