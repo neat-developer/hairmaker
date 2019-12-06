@@ -7572,9 +7572,6 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
                                                                             }
 
 
-
-
-
                                                                             #comp-k3q256vtcenteredContent {
                                                                                 position: relative;
                                                                             }
@@ -7626,13 +7623,16 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
                                                                                                 #comp-k3sznf8dinlineContent {
                                                                                                     width: 740px;
                                                                                                 }
+
                                                                                                 #comp-k3sznf8d {
                                                                                                     left: 120px;
                                                                                                 }
+
                                                                                                 #comp-k3sznf8d2, #comp-k3sznf8d1 {
                                                                                                     width: 660px;
                                                                                                 }
                                                                                             }
+
                                                                                             #comp-k3sznf8d1 {
                                                                                                 position: relative;
                                                                                                 margin: 53px 0px 33px 0;
@@ -7957,11 +7957,11 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
                                                                                                                         <div id="comp-k3osubrfform-gridWrapper" data-mesh-internal="true">
                                                                                                                             <div id="comp-k3osubrfform-gridContainer" data-mesh-internal="true">
                                                                                                                                 <div class="style-k3rgec3d1_left-direction style-k3rgec3d1" data-disabled="false" style="width:940px;height:42px" id="comp-k3osubs2">
-                                                                                                                                    <label style="padding-left:0;padding-right:20px;display:none;margin-bottom:9px;text-align:left;direction:ltr" for="comp-k3osubs2input" id="comp-k3osubs2label" class="style-k3rgec3d1label"></label><input type="text" style="padding-left:12px" value="" required="" placeholder="Имя" maxLength="100" class="has-custom-focus style-k3rgec3d1input" id="comp-k3osubs2input"/>
+                                                                                                                                    <label style="padding-left:0;padding-right:20px;display:none;margin-bottom:9px;text-align:left;direction:ltr" for="comp-k3osubs2input" id="comp-k3osubs2label" class="style-k3rgec3d1label"></label><input type="text" style="padding-left:12px" value="" required="" placeholder="Имя" maxLength="100" name="name" class="has-custom-focus style-k3rgec3d1input" id="comp-k3osubs2input"/>
                                                                                                                                     <p style="display:none" id="comp-k3osubs2message" class="style-k3rgec3d1message"></p>
                                                                                                                                 </div>
                                                                                                                                 <div class="style-k3rgec3d_left-direction style-k3rgec3d" data-disabled="false" style="width:940px;height:42px" id="comp-k3osubsa">
-                                                                                                                                    <label style="padding-left:0;padding-right:20px;display:none;margin-bottom:9px;text-align:left;direction:ltr" for="comp-k3osubsainput" id="comp-k3osubsalabel" class="style-k3rgec3dlabel"></label><input type="tel" style="padding-left:12px" value="" required="" placeholder="Телефон" maxLength="50" class="has-custom-focus style-k3rgec3dinput" id="comp-k3osubsainput"/>
+                                                                                                                                    <label style="padding-left:0;padding-right:20px;display:none;margin-bottom:9px;text-align:left;direction:ltr" for="comp-k3osubsainput" id="comp-k3osubsalabel" class="style-k3rgec3dlabel"></label><input type="tel" style="padding-left:12px" value="" required="" placeholder="Телефон" maxLength="50" name="phone" class="has-custom-focus style-k3rgec3dinput" id="comp-k3osubsainput"/>
                                                                                                                                     <p style="display:none" id="comp-k3osubsamessage" class="style-k3rgec3dmessage"></p>
                                                                                                                                 </div>
                                                                                                                                 <div id="comp-k3osubtd" data-align="center" data-disabled="false" data-margin="0" data-should-use-flex="true" data-width="940" data-height="50" style="width:940px;height:50px;cursor:pointer" class="style-k3rgec3c" data-state="desktop shouldUseFlex center">
@@ -8111,10 +8111,12 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
 <script>
     let backBtn = document.getElementById('comp-k3q256rgnextButton');
     let nextBtn = document.getElementById('comp-k3q256rgprevButton');
+
     let reviewElements = {
         'name': document.getElementById('review__user-name'),
         'review': document.getElementById('review__user-description'),
     };
+    let formField = document.getElementById('comp-k3osubrfform');
     let currentIdx = 0;
     let availableReviews = [
         {
@@ -8139,11 +8141,34 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
         changeSlide();
     });
 
+    formField.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let url = 'http://151.248.117.41:2222/send-client-info';
+        if (formField.checkValidity()) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                name: formField.name.value,
+                phone: formField.phone.value,
+            }));
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    let result = JSON.parse(xhr.response);
+                    if (result.msg === 'success') {
+                        formField.name.value = '';
+                        formField.phone.value = '';
+                    }
+                }
+            };
+        }
+    });
 
     function changeSlide() {
         reviewElements.name.innerHTML = availableReviews[currentIdx].name;
         reviewElements.review.innerHTML = availableReviews[currentIdx].review;
     }
+
     changeSlide();
 </script>
 
