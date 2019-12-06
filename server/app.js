@@ -46,8 +46,8 @@ app.post('/send-client-info', (req, res) => {
                             html: '<!DOCTYPE html><html lang="ru"><head> <meta charset="UTF-8"> <title>Пользователь хочет записаться</title>' +
                                 '</head><body>' +
                                 '<h1>Пользователь оставил свой номер</h1>' +
-                                '<p>Имя: ' +params.name + '</p>' +
-                                '<p>Номер телефона: ' + params.phone + '</p>' +
+                                '<p>Имя: <b>' +params.name + '</b></p>' +
+                                '<p>Номер телефона: <b>' + params.phone + '</b></p>' +
                                 '</body></html>'
                         })
                     }
