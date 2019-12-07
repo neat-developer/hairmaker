@@ -23,8 +23,6 @@ app.post('/send-client-info', (req, res) => {
             logList.push(params);
             logList = JSON.stringify(logList); //convert it back to json
             fs.writeFile(filename, logList, 'utf8', () => {
-
-
                 fs.readFile(__dirname + '/config/mail.json', 'utf8', function readFileCallback(err, user) { // Почта
                     if (err) {
                         console.log(err);
