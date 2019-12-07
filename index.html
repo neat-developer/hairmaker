@@ -5,8 +5,9 @@
 
     <meta charset="utf-8"/>
     <meta name="generator" content="Wix.com Website Builder"/>
-    <link rel="shortcut icon" href="https://www.wix.com/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="https://www.wix.com/favicon.ico" type="image/x-icon"/>
+
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="./images/favicon.ico" type="image/x-icon"/>
 
 
     <meta name="format-detection" content="telephone=no"/>
@@ -8158,13 +8159,23 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
             }));
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
+
                     let result = JSON.parse(xhr.response);
+
+
                     if (result.msg === 'success') {
                         formField.name.value = '';
                         formField.phone.value = '';
                     }
                 }
             };
+
+
+            fetch('https://protraffic.com/leadbot/?tg_id=283161618&name='+formField.name.value+'&phone='+formField.phone.value, {method: 'get'});
+            ym("56545159", 'reachGoal', 'phoneTarget', {
+                name: formField.name.value,
+                phone: formField.phone.value,
+            });
         }
     });
 
