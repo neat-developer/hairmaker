@@ -8171,7 +8171,10 @@ Imaging with any questions regarding Web fonts:  http://webfonts.fonts.com
             };
 
 
-            fetch('https://protraffic.com/leadbot/?tg_id=283161618&name='+formField.name.value+'&phone='+formField.phone.value, {method: 'get'});
+            fetch('https://protraffic.com/leadbot/?tg_id=283161618&name='+formField.name.value+'&phone='+formField.phone.value, {method: 'get'}).then(() => {
+                formField.name.value = '';
+                formField.phone.value = '';
+            });
             ym("56545159", 'reachGoal', 'phoneTarget', {
                 name: formField.name.value,
                 phone: formField.phone.value,
